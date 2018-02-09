@@ -34,7 +34,8 @@ class SerialData:
 
     def __init__(self):
         # 1行読み込み 末尾の改行削除
-        pl = ser.readline().rstrip()
+        line = ser.readline().rstrip()
+        pl = map(ord, line[1:].decode('hex'))
         self.check(pl)
         self.read(pl)
 
