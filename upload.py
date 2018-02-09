@@ -2,7 +2,7 @@
 # coding: UTF-8
 
 """
-FILE        :main.py
+FILE        :upload.py
 DATE        :2017.02.23
 DESCRIPTION :アップロードプログラム
 NAME        :MONO WIRELESS INC.
@@ -12,9 +12,18 @@ NAME        :MONO WIRELESS INC.
 import serial
 import urllib
 import urllib2
+import sys
 
 # URLの指定
 url = 'https://tmpsys-sangitan.appspot.com/upload'
+
+# 動作モード
+# upload: アップロード
+# 指定なし: printで画面上に表示
+try:
+    mode = sys.argv[1]
+except Exception:
+    mode = "print"
 
 # シリアルポートを開く
 ser = serial.Serial('/dev/ttyUSB0',115200)
@@ -109,25 +118,10 @@ class SerialData:
         self.ad3 = ad[3]
         self.ad4 = ad[4]
 
-
-# アドレス位置
-AIadress = 37
-IDadress = 15
-
 # 読み込みループ
 while True:
     try:
         sd = SerialData()
-
-        rev = ser.readline()
-        ID = rev[IDadress:IDadress+4]
-        AIstr = rev[AIadress:AIadress+2]
-        AIkad = rev[AIadress+8:AIadress+10]
-        AI = int(AIkad,16)
-        AIh = int(bin(AI & 0b11),2) * 4
-        AI = int(AIstr,16)
-        TempV = AI * 16 +AIh
-        Temp = float(TempV - 500) /10
         params = urllib.urlencode({
             'devid': sd.src_long,
             'fi'   : sd.LQI,
@@ -135,10 +129,12 @@ while True:
             'val'  : float(sd.ad1 - 500) /10,
             'ad1'  : sd.ad1
         })
-        print(params)
-        # urllib2.urlopen(url,params)
+        if mode == "upload":
+            urllib2.urlopen(url,params)
+        else:
+            print params
     except Exception:
         import traceback
-        print(traceback.format_exc())
+        print traceback.format_exc()
 
 ser.close()
