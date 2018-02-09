@@ -11,15 +11,18 @@ Raspberry Piで動作し、Monostickからの受信データを[Remote Monitorin
 ## Demo
 <!-- 動作デモ アニメーションGIFがよく使われる -->
 
-## Requirement
-<!-- 要件 -->
 
 ## Usage
 <!-- 使用方法 これ要る？ -->
+    $ python upload.py [mode]
+
+動作モードは二つある
+- upload: クラウドにデータを送信する
+- 指定なし: 画面に受信データを出力する
 
 ## Install
 <!-- インストール方法 この場合はGAEにソースをクローンして稼働するまで -->
-
+    $ git clone https://github.com/b4b4r07/awesome-tool
 
 ## Author
 <!-- 著者 卒業研究なので学校名義で -->
