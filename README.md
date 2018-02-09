@@ -10,7 +10,7 @@ Raspberry Piで動作し、Monostickからの受信データを[Remote Monitorin
 
 ## Demo
 <!-- 動作デモ アニメーションGIFがよく使われる -->
-
+![demo](https://github.com/tmpsys-sangitan/Remote-Monitoring-System-Upload/blob/master/wiki/demo.gif)
 
 ## Usage
 <!-- 使用方法 これ要る？ -->
@@ -22,7 +22,7 @@ Raspberry Piで動作し、Monostickからの受信データを[Remote Monitorin
 
 ## Install
 <!-- インストール方法 この場合はGAEにソースをクローンして稼働するまで -->
-    $ git clone https://github.com/b4b4r07/awesome-tool
+    $ git clone https://github.com/tmpsys-sangitan/Remote-Monitoring-System-Upload.git
 
 ## Author
 <!-- 著者 卒業研究なので学校名義で -->
