@@ -40,7 +40,7 @@ class SerialData:
 
     def check(self, pl):
         # 長さ
-        if len(pl) != 23:
+        if len(pl) != 49:
             raise ValueError("Lack of data length.")
 
         # チェックサム
