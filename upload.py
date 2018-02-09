@@ -35,21 +35,24 @@ class SerialData:
     def __init__(self):
         # 1行読み込み 末尾の改行削除
         pl = ser.readline().rstrip()
-        if self.check(pl):
-            self.read(pl)
+        self.check(pl)
+        self.read(pl)
 
     def check(self, pl):
         # 長さ
-        if len(pl) != 23: return False
+        if len(pl) != 23:
+            raise ValueError("Lack of data length.")
 
         # チェックサム
         lst = map(ord, pl[1:].decode('hex'))
         csum = sum(lst) & 0xff
         lst.pop()
-        if csum: return False
+        if csum:
+            raise ValueError("Checksum does not match.")
 
         # データ種別
-        if lst[1] != 0x81: return False
+        if pl[1] != 0x81:
+            raise ValueError("The type is different.")
 
         # 全てOKなら
         return True
