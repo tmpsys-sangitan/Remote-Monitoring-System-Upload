@@ -41,13 +41,12 @@ class SerialData:
 
     def check(self, pl):
         # 長さ
-        if len(pl) != 49:
+        if len(pl) != 24:
             raise ValueError("Lack of data length.")
 
         # チェックサム
-        lst = map(ord, pl[1:].decode('hex'))
-        csum = sum(lst) & 0xff
-        lst.pop()
+        csum = sum(pl) & 0xff
+        pl.pop()
         if csum:
             raise ValueError("Checksum does not match.")
 
@@ -131,7 +130,7 @@ while True:
             'fi'   : sd.LQI,
             'bv'   : sd.volt,
             'val'  : float(sd.ad1 - 500) /10,
-            'ad1'  : sd.ad1
+            'ad'  : sd.ad1
         })
         if mode == "upload":
             urllib2.urlopen(url,params)
