@@ -127,10 +127,10 @@ while True:
         sd = SerialData()
         params = urllib.urlencode({
             'devid': sd.src_long,
-            'fi'   : sd.LQI,
-            'bv'   : sd.volt,
-            'val'  : float(sd.ad1 - 500) /10,
-            'ad'  : sd.ad1
+            'i'   : sd.LQI,
+            'v'   : sd.volt,
+            'p1'  : float(sd.ad1 - 500) /10,
+            'a1'  : sd.ad1
         })
         if mode == "upload":
             urllib2.urlopen(url,params)
