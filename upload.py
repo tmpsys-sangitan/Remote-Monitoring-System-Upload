@@ -9,10 +9,12 @@ NAME        :MONO WIRELESS INC.
              Hikaru Yoshida
 """
 
+import logging.config
 import serial
+import sys
+import traceback
 import urllib
 import urllib2
-import sys
 
 # URLの指定
 url = 'https://tmpsys-sangitan.appspot.com/upload'
@@ -24,6 +26,10 @@ try:
     mode = sys.argv[1]
 except Exception:
     mode = "print"
+
+# ログの設定
+logging.config.fileConfig('logging.conf')
+logger = logging.getLogger()
 
 # シリアルポートを開く
 ser = serial.Serial('/dev/ttyUSB0',115200)
@@ -135,9 +141,9 @@ while True:
         if mode == "upload":
             urllib2.urlopen(url,params)
         else:
-            print params
+            logger.info("success " + params)
     except Exception:
-        import traceback
-        print traceback.format_exc()
+        logger.error("error " + params)
+        logger.error(traceback.format_exc())
 
 ser.close()
