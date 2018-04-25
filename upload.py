@@ -28,7 +28,7 @@ except Exception:
     mode = "print"
 
 # ログの設定
-logging.config.fileConfig('logging.conf')
+logging.config.fileConfig('/home/pi/Remote-Monitoring-System-Upload/logging.conf')
 logger = logging.getLogger()
 
 # シリアルポートを開く
